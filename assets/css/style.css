@@ -1,0 +1,30 @@
+.jumbotron {
+    height: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #aec6cf;
+}
+
+.card {
+    border-color: #9b859a;
+    margin-bottom: 25px;
+}
+
+.card-header {
+    background-color: #9b859a;
+    color: #ffffff;
+}
+
+.btn {
+    background-color: #9b859a;
+    border-color: #9b859a;
+}
+
+label {
+    font-weight: normal;
+    margin-bottom: 2px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}

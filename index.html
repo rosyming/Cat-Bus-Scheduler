@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>Train Time</title>
+
+    
+
+    <!-- Added a link to Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Jumbotron -->
+    <div class="jumbotron border">
+        <h1 class="display-4">Comeon Ride the Train</h1>
+        <p class="lead">Ride it</p>
+        <hr class="my-4">
+        <p>This is a simple sample app to capture the train schedule and determine arrival times.</p>
+    </div>
+
+    <!-- Train Schedule Table -->
+    <div class="card">
+        <div class="card-header">Current Train Schedule</div>   
+
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Train Name</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Frequency (min)</th>
+                    <th scope="col">Next Arrival</th>
+                    <th scope="col">Minutes Away</th>
+                    </tr>
+                </thead>
+
+                <!-- Where Train info gets populated into DOM-->
+                <tbody>
+
+                    <tr>
+                        <th scope="row">Train 1</th>
+                        <td>Destination 1</td>
+                        <td>Freq 1</td>
+                        <td>Next Arrival 1</td>
+                        <td>Min Away 1</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Train 2</th>
+                        <td>Destination 1</td>
+                        <td>Freq 1</td>
+                        <td>Next Arrival 1</td>
+                        <td>Min Away 1</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add Train Form -->
+    <div class="card">
+            <div class="card-header">Add Train</div>          
+            <div class="card-body">
+                <form id="train-form">
+                    <div class="form-group">
+                        <label for="name">Train Name</label>
+                        <input id="train-name-input" type="text" class="form-control" value="" required placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="destination">Destination City</label>
+                        <input id="destination-input" type="text" class="form-control" value="" required placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="time">First Train Time (HH:mm - military time)</label>
+                        <input id="time-input" type="text" class="form-control" value="" required placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="freq">Frequency (min)</label>
+                        <input id="freq-input" type="text" class="form-control" value="" required placeholder="">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>     
+            </div>
+        </div>
+    
+
+
+</div>
+     
+<!-- Added link to the jQuery Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="assets/javascript/app.js"></script> 
+
+</body>
+</html>
