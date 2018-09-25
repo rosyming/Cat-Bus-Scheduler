@@ -41,7 +41,7 @@
                 </thead>
 
                 <!-- Where Train info gets populated into DOM-->
-                <tbody>
+                <tbody id="table-body">
 
                     <tr>
                         <th scope="row">Train 1</th>
@@ -93,7 +93,22 @@
 
 
 </div>
-     
+
+<!-- Firebase JavaScript Link-->
+<script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCAhIuT-M_3CEyeBeSSuur65Y0hJsZduCw",
+    authDomain: "train-scheduler-2b808.firebaseapp.com",
+    databaseURL: "https://train-scheduler-2b808.firebaseio.com",
+    projectId: "train-scheduler-2b808",
+    storageBucket: "train-scheduler-2b808.appspot.com",
+    messagingSenderId: "262304376221"
+  };
+  firebase.initializeApp(config);
+</script>
+
 <!-- Added link to the jQuery Library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="assets/javascript/app.js"></script> 
