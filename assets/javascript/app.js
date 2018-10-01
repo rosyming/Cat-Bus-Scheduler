@@ -1,20 +1,21 @@
+// Initialize Firebase
+var config = {
+    apiKey: 'AIzaSyCAhIuT-M_3CEyeBeSSuur65Y0hJsZduCw',
+    authDomain: 'train-scheduler-2b808.firebaseapp.com',
+    databaseURL: 'https://train-scheduler-2b808.firebaseio.com',
+    projectId: 'train-scheduler-2b808',
+    storageBucket: 'train-scheduler-2b808.appspot.com',
+    messagingSenderId: '262304376221'
+  };
+  firebase.initializeApp(config);
+
 // Reference to Firebase database service
 var database = firebase.database();
 
-// Initial variables (to first set in Firebase)
-var trainNameInput = '';
-var destinationInput = '';
-var timeInput = '';
-var freqInput = '';
+$(document).ready(function(){
 
-// Initial local arrays to hold information 
-var trainNameArray = [];
-var destinationArray = [];
-var timeArray = [];
-var freqArray = [];
-
-// Function to create Table Row and add data to table
-function createTableRow() {
+// Function to create and append table row
+function createTableRow(trainNameInput, destinationInput, freqInput, nextArrival, minAway) {
     // Creating Table Row
     var tableRow = $('<tr>', {id:'table-row'});
     var col1 = $('<th>', {id:'col1', scope:'row'});
@@ -22,96 +23,109 @@ function createTableRow() {
     var col3 = $('<td>', {id:'col3'});
     var col4 = $('<td>', {id:'col4'});
     var col5 = $('<td>', {id:'col5'});
-   
+       
     // Adding data and attributes to table row
-    col1.attr('col1-attr',trainNameInput);
+    col1.attr('col1-attr', trainNameInput);
     col1.text(trainNameInput);
 
-    col2.attr('col2-attr',destinationInput);
+    col2.attr('col2-attr', destinationInput);
     col2.text(destinationInput);
 
-    col3.attr('col3-attr',freqInput);
+    col3.attr('col3-attr', freqInput);
     col3.text(freqInput);
 
-    //col4.attr('col4-attr',freqInput);
-    //col4.text(freqInput);
+    col4.attr('col4-attr', nextArrival);
+    col4.text(nextArrival);
 
-    //col5.attr('col5-attr',trainNameInput);
-    //col5.text(trainNameInput);
+    col5.attr('col5-attr', minAway);
+    col5.text(minAway + ' min');
 
     // Append to Table Row to body
     $('#table-body').append(tableRow);
     tableRow.append(col1, col2, col3, col4, col5);
 }
 
-
-// Form entry and append to DOM
+// User inputs/Form entry and append to DOM
 $('#train-form').submit(function(event) {
     event.preventDefault();
 
-    // Get inputs locally
-    trainNameInput = $('#train-name-input').val().trim();
-    destinationInput = $('#destination-input').val().trim();
-    timeInput = $('#time-input').val().trim();
-    freqInput = $('#freq-input').val().trim();
+    // Grabs user inputs 
+    var trainNameInput = $('#train-name-input').val().trim();
+    var destinationInput = $('#destination-input').val().trim();
+    var timeInput = $('#time-input').val().trim();
+    var freqInput = $('#freq-input').val().trim();
 
-    // Pushing inputs to local arrays
-    trainNameArray.push(trainNameInput);
-    destinationArray.push(destinationInput);
-    timeArray.push(timeInput);
-    freqArray.push(freqInput);
+    // Local temp object to hold train data
+    var newTrain = {
+        name: trainNameInput,
+        destination: destinationInput,
+        time: timeInput,
+        freq: freqInput
+    };
 
     // Adding data to Firebase
-    database.ref().set({
-        trainNameInput: trainNameInput, 
-        destinationInput: destinationInput, 
-        timeInput: timeInput,
-        freqInput: freqInput,
-        trainNameArrayFB: trainNameArray, 
-        destinationArrayFB: destinationArray, 
-        timeArrayFB: timeArray,
-        freqArrayFB: freqArray
-    });    
+    database.ref().push(newTrain);
 
-    // Running function to add input data to table
-    createTableRow();
+    // Making sure input loaded correctly
+    console.log(newTrain.name);
+    console.log(newTrain.destination);
+    console.log(newTrain.time);
+    console.log(newTrain.freq);
 
-    // Resetting form upon submit    
-    $("#train-form")[0].reset();
+   // Resetting form upon submit    
+   //$('#train-form')[0].reset();
 });
 
-
-// Firebase watcher (NEED TO BUILD OUT. THIS IS SAMPLE CODE)
-database.ref().on("value", function(snapshot) {
-
-    // Clearing the Table Body
-    //$('#table-body').empty();
-
-    // Console.log snapshot
+// Firebase watcher
+database.ref().on('child_added', function(snapshot) {
     console.log(snapshot.val());
-    console.log(snapshot.val().trainNameArrayFB[0]);
-    console.log(snapshot.val().trainNameArrayFB);
-    console.log(snapshot.val().trainNameArrayFB.length);
 
+    // Storing input into variable
+    var trainNameInput = snapshot.val().name;
+    var destinationInput = snapshot.val().destination;
+    var timeInput = snapshot.val().time;
+    var freqInput = snapshot.val().freq;
 
-    // Creating for loop to loop through arrays in Firebase to load new information
-    for (var i = 0; i < snapshot.val().trainNameArrayFB.length; i++) {
-
-        console.log(snapshot.val().trainNameArrayFB[i]);
-        console.log(trainNameInput);
-
-        // Pulling snapshot of array data from Firebase
-        trainNameInput = $('#train-name-input').text(snapshot.val().trainNameArrayFB[i]);
-        destinationInput = $('#destination-input').text(snapshot.val().destinationArrayFB[i]);
-        timeInput = $('#time-input').text(snapshot.val().timeArrayFB[i]);
-        freqInput = $('#freq-input').text(snapshot.val().freqArrayFB[i]);
+    // Train info
+    console.log(trainNameInput);
+    console.log(destinationInput);
+    console.log(timeInput);
+    console.log(freqInput);
     
-        // Running function to add Firebase snapshot data to table
-        createTableRow();    
-    }
 
-    // Handle the errors
-}, function(errorObject) {
-    console.log("Errors handled: " + errorObject.code);
-}); 
+    // Moment JS
+    // Moment JS conversions
+    var timeInputConverted = moment(timeInput, 'HH:mm').subtract(1, 'years');
+    console.log(timeInputConverted);
+    
+    // Current Time
+    var currentTime = moment().format('HH:mm');
+    console.log('CURRENT TIME: ' + currentTime);
 
+    // Difference between current time and first train times
+    var diffTime = moment().diff(timeInputConverted, 'minutes');
+    console.log('DIFFERENCE IN TIME: ' + diffTime);
+
+    // Time apart (remainder)
+    var tRemainder = diffTime % freqInput;
+    console.log('Remainder: ' + tRemainder);
+
+    // Minute Away
+    var minAway = freqInput - tRemainder;
+    console.log('MINUTES TILL TRAIN: ' + minAway);
+
+    // Next Train
+    var nextArrival = moment().add(minAway, 'minutes').format('hh:mm');
+    console.log('ARRIVAL TIME: ' + moment(nextArrival).format('hh:mm'));
+
+    
+    // Running function to add input data to table
+    createTableRow(trainNameInput, destinationInput, freqInput, nextArrival, minAway);
+});
+
+});
+    
+
+
+
+    
