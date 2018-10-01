@@ -73,7 +73,7 @@ $('#train-form').submit(function(event) {
     console.log(newTrain.freq);
 
    // Resetting form upon submit    
-   //$('#train-form')[0].reset();
+   $('#train-form')[0].reset();
 });
 
 // Firebase watcher
@@ -116,7 +116,7 @@ database.ref().on('child_added', function(snapshot) {
 
     // Next Train
     var nextArrival = moment().add(minAway, 'minutes').format('hh:mm A');
-    console.log('ARRIVAL TIME: ' + moment(nextArrival).format('hh:mm A'));
+    console.log('ARRIVAL TIME: ' + nextArrival);
 
     
     // Running function to add input data to table
