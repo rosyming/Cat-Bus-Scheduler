@@ -115,8 +115,8 @@ database.ref().on('child_added', function(snapshot) {
     console.log('MINUTES TILL TRAIN: ' + minAway);
 
     // Next Train
-    var nextArrival = moment().add(minAway, 'minutes').format('hh:mm');
-    console.log('ARRIVAL TIME: ' + moment(nextArrival).format('hh:mm'));
+    var nextArrival = moment().add(minAway, 'minutes').format('hh:mm A');
+    console.log('ARRIVAL TIME: ' + moment(nextArrival).format('hh:mm A'));
 
     
     // Running function to add input data to table
