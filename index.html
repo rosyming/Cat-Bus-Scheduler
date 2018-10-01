@@ -6,8 +6,6 @@
     
     <title>Bus Time</title>
 
-    
-
     <!-- Added a link to Bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -15,93 +13,75 @@
 <body>
 
 <div class="container">
-      
-        <!-- Jumbotron -->
-        <div class="jumbotron border">
-            <div class="row">
-                <div class="col-7">
-                    <h1 class="display-4">Catbus Schedule</h1>
-                    
-                    <p class="lead">
-                        Always on time when you need it, Catbus will take you anywhere your heart desires...
-                    </p>
-                    <hr class="my-4">
-                    
-                    <p>
-                        (This is a simple sample app to capture the Catbus schedule, destination, frequency of departures, and arrival times.)
-                    </p>
+    <!-- Jumbotron -->
+    <div class="jumbotron border">
+        <div class="row">
+            <div class="col-7">
+                <h1 class="display-4">Catbus Schedule</h1>
                 
-                    
+                <p class="lead">Always on time when you need it, Catbus will take you anywhere your heart desires...</p>
+                <hr class="my-4">
+                
+                <p>(This is a simple sample app to capture the Catbus schedule, destination, frequency of departures, and arrival times.)</p>
+            </div>
 
+            <div class="col-5">
+                <img src="assets/images/Cat Bus 2.jpg" class="img-fluid rounded" alt="Responsive image">
+
+                <p id="info">*<a href="https://en.wikipedia.org/wiki/Catbus">Catbus </a> is based off of a character in the Studio Ghibli film My Neighbor Totoro by Hayao Miyazaki. Image <a href=https://fineartamerica.com/featured/catbus-and-totoro-blue-erzebet-s.html?product=art-print>source.</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Train Schedule Table -->
+    <div class="card">
+        <div class="card-header">Current Bus Schedule</div>   
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">Bus Name</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Frequency (min)</th>
+                        <th scope="col">Next Arrival</th>
+                        <th scope="col">Minutes Away</th>
+                        </tr>
+                    </thead>
+
+                    <!-- Where Train info gets populated into DOM-->
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>    
+        </div>
+    </div>
+
+    <!-- Add Train Form -->
+    <div class="card">
+        <div class="card-header">Add Bus</div>          
+        <div class="card-body">
+            <form id="train-form">
+                <div class="form-group">
+                    <label for="name">Bus Name</label>
+                    <input id="train-name-input" type="text" class="form-control" value="" required placeholder="">
                 </div>
-
-                <div class="col-5">
-                    <img src="assets/images/Cat Bus 2.jpg" class="img-fluid rounded" alt="Responsive image">
-
-                    <p id="info">
-                        *<a href="https://en.wikipedia.org/wiki/Catbus">Catbus </a> is based off of a character in the Studio Ghibli film My Neighbor Totoro by Hayao Miyazaki. Image <a href=https://fineartamerica.com/featured/catbus-and-totoro-blue-erzebet-s.html?product=art-print>source.</a>
-                    </p>
+                <div class="form-group">
+                    <label for="destination">Destination City</label>
+                    <input id="destination-input" type="text" class="form-control" value="" required placeholder="">
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="time">First Bus Time (HH:mm - military time)</label>
+                    <input id="time-input" type="text" class="form-control" pattern="([0-1][0-9]|2[0-3]):([0-5][0-9])$" value="" required placeholder="Example: 22:59 is 10:59 pm">
+                </div>
+                <div class="form-group">
+                    <label for="freq">Frequency (min)</label>
+                    <input id="freq-input" type="number" class="form-control" min="1" step="1" value="" required placeholder="Please enter a number">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>     
         </div>
-    
-    
-
-    
-
-        <!-- Train Schedule Table -->
-        <div class="card">
-            <div class="card-header">Current Bus Schedule</div>   
-
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                            <th scope="col">Bus Name</th>
-                            <th scope="col">Destination</th>
-                            <th scope="col">Frequency (min)</th>
-                            <th scope="col">Next Arrival</th>
-                            <th scope="col">Minutes Away</th>
-                            </tr>
-                        </thead>
-
-                        <!-- Where Train info gets populated into DOM-->
-                        <tbody id="table-body"></tbody>
-                    </table>
-                </div>    
-            </div>
-        </div>
-
-        <!-- Add Train Form -->
-        <div class="card">
-            <div class="card-header">Add Bus</div>          
-            <div class="card-body">
-                <form id="train-form">
-                    <div class="form-group">
-                        <label for="name">Bus Name</label>
-                        <input id="train-name-input" type="text" class="form-control" value="" required placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label for="destination">Destination City</label>
-                        <input id="destination-input" type="text" class="form-control" value="" required placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label for="time">First Bus Time (HH:mm - military time)</label>
-                        <input id="time-input" type="text" class="form-control" pattern="([0-1][0-9]|2[0-3]):([0-5][0-9])$" value="" required placeholder="Example: 22:59 is 10:59 pm">
-                    </div>
-                    <div class="form-group">
-                        <label for="freq">Frequency (min)</label>
-                        <input id="freq-input" type="number" class="form-control" min="1" step="1" value="" required placeholder="Please enter a number">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>     
-            </div>
-        </div>
-    
-    
-
-
+    </div>
 </div>
 
 <!-- Firebase JavaScript Link-->

@@ -110,7 +110,7 @@ database.ref().on('child_added', function(snapshot) {
     var tRemainder = diffTime % freqInput;
     console.log('Remainder: ' + tRemainder);
 
-    // Minute Away
+    // Minutes Away
     var minAway = freqInput - tRemainder;
     console.log('MINUTES TILL TRAIN: ' + minAway);
 
